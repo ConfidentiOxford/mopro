@@ -170,12 +170,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 build_mode = "release"
 
                 [circuit]
-                dir = "examples/circom/keccak256"
-                name = "keccak256_256_test"
+                dir = "examples/circom/multiplier2"
+                name = "multiplier2"
 
                 [dylib]
                 use_dylib = false
-                name = "keccak256.dylib"
+                name = "multiplier2.dylib"
             "#;
             default_config.to_string()
         }
