@@ -67,34 +67,34 @@ esac
 PROJECT_DIR=$(pwd)
 
 # Build circom circuits in mopro-core
-cd "${PROJECT_DIR}/mopro-core"
-if [[ "$BUILD_MODE" == "debug" ]]; then
-    cargo build
-    elif [[ "$BUILD_MODE" == "release" ]]; then
-    cargo build --release
-fi
+# cd "${PROJECT_DIR}/mopro-core"
+# if [[ "$BUILD_MODE" == "debug" ]]; then
+#     cargo build
+#     elif [[ "$BUILD_MODE" == "release" ]]; then
+#     cargo build --release
+# fi
 
 # Build MoproKit pods
-cd "${PROJECT_DIR}/mopro-ios/MoproKit/Example"
-pod install
+# cd "${PROJECT_DIR}/mopro-ios/MoproKit/Example"
+# pod install
 
 # Update bindings
 cd "${PROJECT_DIR}"
 ./scripts/update_bindings.sh $CONFIG_FILE
 
 # Update xcconfig
-MODES="debug release"
-XCCONFIG_PATH=mopro-ios/MoproKit/Example/Pods/Target\ Support\ Files/MoproKit
-CONFIGS="
-LIBRARY_SEARCH_PATHS=\${SRCROOT}/../../Libs
-OTHER_LDFLAGS=-lmopro_ffi
-USER_HEADER_SEARCH_PATHS=\${SRCROOT}/../../include
-"
-for mode in $MODES; do
-    FILE_NAME="${PROJECT_DIR}/${XCCONFIG_PATH}/MoproKit.${mode}.xcconfig"
-    for config in $CONFIGS; do
-        if ! grep -q "${config}" "${FILE_NAME}"; then
-            echo "${config}" >> "${FILE_NAME}"
-        fi
-    done
-done
+# MODES="debug release"
+# XCCONFIG_PATH=mopro-ios/MoproKit/Example/Pods/Target\ Support\ Files/MoproKit
+# CONFIGS="
+# LIBRARY_SEARCH_PATHS=\${SRCROOT}/../../Libs
+# OTHER_LDFLAGS=-lmopro_ffi
+# USER_HEADER_SEARCH_PATHS=\${SRCROOT}/../../include
+# "
+# for mode in $MODES; do
+#     FILE_NAME="${PROJECT_DIR}/${XCCONFIG_PATH}/MoproKit.${mode}.xcconfig"
+#     for config in $CONFIGS; do
+#         if ! grep -q "${config}" "${FILE_NAME}"; then
+#             echo "${config}" >> "${FILE_NAME}"
+#         fi
+#     done
+# done
